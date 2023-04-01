@@ -1,0 +1,82 @@
+package repositories;
+
+import DomainModel.KhachHang;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import utils.HIbernateUtils;
+import viewModel.QLKhachHang;
+import javax.persistence.TypedQuery;
+import java.util.ArrayList;
+import java.util.List;
+
+public class KhachHangRepository {
+    private ArrayList<QLKhachHang> list;
+    private Session hSession;
+
+    public KhachHangRepository()
+    {
+        this.list = new ArrayList<>();
+        this.hSession = HIbernateUtils.getFACTORY().openSession();
+    }
+
+    public void insert(KhachHang kh)
+    {
+        Transaction transaction = this.hSession.getTransaction();
+        try {
+            transaction.begin();
+            this.hSession.persist(kh);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }
+    }
+
+    public void update(KhachHang kh)
+    {
+        Transaction transaction = this.hSession.getTransaction();
+        try {
+            transaction.begin();
+            this.hSession.merge(kh);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }
+    }
+
+    public void delete(KhachHang kh)
+    {
+        Transaction transaction = this.hSession.getTransaction();
+        try {
+            transaction.begin();
+            this.hSession.delete(kh);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }
+    }
+
+    public KhachHang findById(String id)
+    {
+        return this.hSession.find(KhachHang.class, id);
+    }
+
+    public List<KhachHang> findAll()
+    {
+        String hql = "SELECT obj FROM KhachHang obj";
+        Query<KhachHang> query = this.hSession.createQuery(hql, KhachHang.class);
+        return query.getResultList();
+    }
+
+    public KhachHang findByMa(String ma)
+    {
+        String hql = "SELECT obj FROM KhachHang obj WHERE obj.Ma = ?1";
+        Query<KhachHang> query = this.hSession.createQuery(hql, KhachHang.class);
+        query.setParameter(1, ma);
+        return query.getSingleResult();
+    }
+
+}
