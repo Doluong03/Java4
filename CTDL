@@ -1,0 +1,115 @@
+- CTDL là cách tổ chức các dữ liệu cơ bản -> các cấu trúc như mảng , chuỗi , file:
+  + Danh sách (List): Danh sách là một cấu trúc dữ liệu được sử dụng để lưu trữ các phần tử dữ liệu, các phần tử này có thể có cùng hoặc khác kiểu dữ liệu.
+
+  + Mảng (Array): Mảng là một cấu trúc dữ liệu lưu trữ các phần tử dữ liệu có cùng kiểu dữ liệu và được sắp xếp theo thứ tự liên tục trong bộ nhớ.
+
+  + Ngăn xếp (Stack): Ngăn xếp là một cấu trúc dữ liệu dạng LIFO (Last-In-First-Out), nghĩa là phần tử cuối cùng được đưa vào sẽ được lấy ra đầu tiên.
+
+  + Hàng đợi (Queue): Hàng đợi là một cấu trúc dữ liệu dạng FIFO (First-In-First-Out), nghĩa là phần tử đầu tiên được đưa vào sẽ được lấy ra đầu tiên.
+
+  + Cây (Tree): Cây là một cấu trúc dữ liệu phân cấp, trong đó mỗi nút có thể có nhiều con, nhưng mỗi con chỉ có một cha.
+
+  + Đồ thị (Graph): Đồ thị là một cấu trúc dữ liệu lưu trữ các đỉnh (vertex) và cạnh (edge) giữa chúng, được sử dụng để mô hình hóa mối quan hệ giữa các đối tượng.
+
+  + Bảng băm (Hash table): Bảng băm là một cấu trúc dữ liệu sử dụng hàm băm để lưu trữ và truy xuất các phần tử dữ liệu, giúp tối ưu hóa thời gian truy xuất dữ liệu.
+
+- Giải thuật là tập hữu hạn các bước tác động lên dữ liệu nào đó để sau khi thực hiện một số hữu hạn các bước sẽ cho ra kết quả
+
+*
+- Mảng (tập hợp các phần từ cố định có cùng kiểu dữ liệu):
+ + Mảng 1 chiều(1 dãy phần tử cố định có cùng tên , 1 chỉ số để chỉ thứ tự VD:A[n])
+ + Mảng nhiều chiều(mảng có từ 2 chiều trở lên, luu thông tin các ma trận,tọa độ VD: A[n][m])
+- Con trỏ (Biến động chỉ lưu trữ địa chỉ dữ liệu VD: int a,b,*pa,*pb --*pa,*pb là 2 biến con trỏ kiểu int chỉ đến a,b )
+ + Thao tác: 
+  - Gán địa chỉ của biến con trỏ: toán tử (&) dùng để định vị đến địa chỉ của biến đang làm vc.
+  - VD(gán địa chỉ biến a cho con trỏ pa và tương tự vs b): pa=&a;pb=&b. 
+ + Cấp pháp vùng nhớ cho con trỏ có kích thước là size:
+  - void *malloc(size_t size):
+ + Cấp pháp vùng nhớ cho con trỏ có kích thước là nitems*size:
+  - void *calloc(size_t nitems ,size_t size):
+ + Cấp pháp lại vùng nhớ cho con trỏ có kích thước là size:
+  - void *realloc(void *block,size_t size)
+ + Giải phóng vùng nhớ cho con trỏ:
+  - void free(void *block)
+- Mối quan hệ Con trỏ - mảng:
+ + lk chặt chẽ
+ + những phần tử của mảng có thể xác định bẳng chỉ số trong mảng or qua bến con trỏ
+ + VD: &A[0] tương đương A; &A[i] ~ A[i]; A[i] ~ *(A[i])
+- Mối quan hệ Con trỏ- mảng 2 chiều: VD: int A[n][m],*conTro_int => Phép gán: conTro_int=A
+*
+- Đệ quy(là kỹ thuật mà 1 hàm có thể gọi chính nó hoặc gọi 1 hàm # để giải quyết 1 vấn đề ):
+ + Đệ quy trực tiếp (Hàm gọi chính nó để giải quyết vấn đề)
+ + Đệ quy gián tiếp (Hàm gọi 1 or nhiều hàm # đến cuối cùng gọi lại hàm ban đầu)
+-Dạng đệ quy:
+ +Đệ quy tuyến tính
+ +Dệ quy nhị phân
+ +Đệ quy tương hỗ
+- Cấu tạo giải thuật đệ quy :
+ + Trường hợp cơ sở: Là trường hợp bài toán có quy mô nhỏ có thể giải trực tiếp . đóng vai trò điểm dừng trong quá     trình suy diễn đệ quy và quyết định tính dừng của giải thuật đệ quy
+ + Trường hợp để quy : là trường họp khái quát chứa cơ chế đệ quy , là cơ chế đưa bài toán cần giải về 1 hay nhiều bài toán tương tự nhưng có quy mô nhỏ hơn
+ - Một hàm đệ quy gồm các thành phần sau:
+  + Điều kiện dừng: Điều kiện để hàm đệ quy dừng lại và trả về kết quả.
+  + Bước đệ quy: Thực hiện một số tính toán và gọi lại chính hàm đó (hoặc một hàm khác) với dữ liệu khác để giải quyết vấn đề.
+ - Hoạt động của giải thuật gồm 2 quá trình :
+  + Quá trình suy diễn đệ quy: là quá trình thu nhỏ bài toán về các bài toán trung gian tương tự nhưng có quy mô giảm dần bằng cách áp dụng cơ chế đệ quy cho đến khi gặp trường hợp cơ sở(điểm dừng của quá trình )
+  + Quá trình quay lui(suy diễn ngược): là quá trình từ kết quả thu đc trong trường hợp cơ sở thực hiện giải các bài toán trung gian trong quá trình suy diễn đệ quy theo trật tự ngc lại, cho đến khi giải quyết dc bài toán đầu.
+ - Xây dựng thủ tục đệ quy 
+  + trong thủ tục đệ quy có lời gọi đến chính thủ tục đó
+  + Mỗi lần thực hiện gọi lại thủ tục thì kích thước bài toán dc thu nhỏ
+  +UD: dễ hiệu , ngắn gọn
+  +ND: tốn thời gian, bộ nhớ
+- Khử đệ quy (kỹ thuật chuyển đổi hàm đệ quy thành hàm không đệ quy và thường sử dụng vòng lặp)
+
+*
+- Giải thuật tìm kiếm(Trường hợp xấu nhất 2*n)
+ + Giải thuật tuần tự:thực hiện trên mảng chưa sắp xếp
+  
+ + Giải thuật nhị phân: thực hiện trên mảng đã sắp xếp
+
+*
+-Sắp xếp:
+ + sắp xếp lựa chọn ( tìm phần tử nhỏ nhất -> hoán vị vs A[i] ; i++) 
+ + sắp xếp nổi bọt ( so sánh theo từng cặp liền kề từ cuối->đầu và đưa phần tử nhỏ hơn lên trc) 
+ + sắp xếp chèn (DUyệt từng thành phần của mảng -> chèn vào vị trí đúng trong dãy con đã đc sắp xếp trc đó)
+
+*
+ - Stack (ngăn xếp) là một cấu trúc dữ liệu được sử dụng để lưu trữ các phần tử theo cách LIFO (Last In First Out), tức là phần tử cuối cùng được thêm vào sẽ được xử lý đầu tiên (có thể rỗng or có 1 số phần tử)
+   + add 1 phần tử vào stack ~ thêm 1 phần tủ vào cuối mảng (thủ tục Push) VD: void Push(Stack &S, item x)
+   + remove 1 phần tử khỏi stack ~ xóa 1 phần tử ở cuối mảng (hàm Pop) VD: int Pop(Stack &S)
+   + Stack bị tràn khi bổ sung vào mảng đã đầy (Last=Max)
+   + Stack rỗng khi số phần tử trong mảng =0 (Last = 0)
+Ứng dụng : khi cần danh sách các sản phẩm vửa mua gần nhất or những kh ms truy cập dùng Stack để lưu trữ hông tin đó
+ - Queue (hàng đợi) là một cấu trúc dữ liệu được sử dụng để lưu trữ các phần tử theo cách FIFO (First In First Out), tức là phần tử đầu tiên được thêm vào sẽ được xử lý đầu tiên
+   + 2 chỉ số First và Last ; Khởi tạo Queue rỗng : First:=1 và Last:=0
+   + add 1 phần tử vào Queue ta tăng biến Last lên 1 và đưa giá trị đó vào phần tử thứ Last VD: void Push(QUeue &Q, item x)
+   + remove 1 phần tử khỏi mảng lấy giá trị ở vị trí First và tăng First lên 1 int Pop(Queue &Q)
+   + if Last = Max(mảng) then mảng đã đầy
+   + if First > Last then Queue rỗng
+   + Chỉ 1 phần của mảng từ vị trí F -> L dc sử dụng làm Queue
+NHược điểm: Bị tràn mảng vì mỗi lần Push chỉ số hàng đợi Last cx tăng và không bh giảm 
+Khắc phục: Sử dụng danh sách vòng: các phần tử nằm trên 1 cung tròn từ F -> L là các phần tử Queue
+   + Thêm 1 phần tử vào Queue ! vc ta dịch chỉ số L theo vòng 1 vị trí rồi đặt giá trị mới vào
+* 
+  -Danh sách liên kết(là một tập hợp các liên kết được đặt trong một trang web, cho phép người dùng truy cập vào các trang web khác hoặc các tài liệu, hình ảnh, video):
+   + Danh sách liên kết đơn (singly linked list): là danh sách các nút (node) có các trường thông tin dữ liệu và trường thông tin liên kết tới nút kế tiếp trong danh sách
+   + Danh sách liên kết đôi (doubly linked list): giống như danh sách liên kết đơn, tuy nhiên mỗi nút trong danh sách liên kết đôi có thêm một trường thông tin liên kết tới nút trước đó.
+
+
+*
+ - Cây (là tập hợp T các phần tử(gọi là nút cây), trong đó có 1 nút đặc biệt là nút gốc , các nút còn lại dc chia thnahf những tập rời nhau T1,T2,..,Tn theo quan hệ phân cấp trong đó Ti cx là 1 cây)
+  + mỗi nút ở cấp i sẽ quản lý nút cấp (i+1) ~ quan hệ cha - con ,mỗi nút có tối đa 2 cây con
+  + bậc của nút: là số cây con của nút
+  + bậc của cây : là bậc lớn nhất của các nút trong cây
+  + Mức của nút : Mức của nút gốc cây con chứa nó cộng 1, trong đó mức của nút gốc =0
+  + chiều cao của cây: là mức cao nhất của các nút trong cây
+  + chiều dài dg đi của 1 nút : là tổng số nút tính từ nút gốc đến nút đó
+- Cây nhị phân là cây đặc biệt mà mỗi nút chỉ có nhiều nhất 2 nút con
+- Cây nhị phân tìm kiếm 
+ + Tính chất: + Khóa của nút con bên trái bh cx nhỏ hơn khóa nút cha
+  		  + Khóa của nút con bên phải bh cx lớn hơn khóa nút cha
+- Duyệt cây nhị phân:
+  + Duyệt theo thứ tự trc (Thứ tự duyệt các nút là: hiện tại -> trái -> phải.)
+  + Duyệt theo thứ tự giữa (Thứ tự duyệt các nút là: trái -> hiện tại -> phải.)
+  + Duyệt theo thứ tự sau ( Thứ tự duyệt các nút là: trái -> phải -> hiện tại.)
+
+
